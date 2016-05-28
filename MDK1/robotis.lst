@@ -1,0 +1,1912 @@
+CCS PCH C Compiler, Version 5.056d, 1               14-3-16 14:15
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   F:\Robotis\Micom\robotis.lst
+
+               ROM used:   1790 bytes (12%)
+                           Largest free fragment is 13758
+               RAM used:   162 (21%) at main() level
+                           196 (26%) worst case
+               Stack used: 0 locations
+               Stack size: 30
+
+*
+0000:  GOTO   06D0
+*
+0008:  MOVWF  04
+000A:  MOVFF  FD8,05
+000E:  MOVFF  FE0,06
+0012:  MOVLB  0
+0014:  MOVFF  FE9,0C
+0018:  MOVFF  FEA,07
+001C:  MOVFF  FE1,08
+0020:  MOVFF  FE2,09
+0024:  MOVFF  FD9,0A
+0028:  MOVFF  FDA,0B
+002C:  MOVFF  FF3,12
+0030:  MOVFF  FF4,13
+0034:  MOVFF  FFA,14
+0038:  MOVFF  FF5,15
+003C:  MOVFF  FF6,16
+0040:  MOVFF  FF7,17
+0044:  MOVFF  00,0E
+0048:  MOVFF  01,0F
+004C:  MOVFF  02,10
+0050:  MOVFF  03,11
+0054:  BTFSS  F9D.5
+0056:  GOTO   0060
+005A:  BTFSC  F9E.5
+005C:  GOTO   00EC
+0060:  MOVFF  0E,00
+0064:  MOVFF  0F,01
+0068:  MOVFF  10,02
+006C:  MOVFF  11,03
+0070:  MOVFF  0C,FE9
+0074:  MOVFF  07,FEA
+0078:  BSF    07.7
+007A:  MOVFF  08,FE1
+007E:  MOVFF  09,FE2
+0082:  MOVFF  0A,FD9
+0086:  MOVFF  0B,FDA
+008A:  MOVFF  12,FF3
+008E:  MOVFF  13,FF4
+0092:  MOVFF  14,FFA
+0096:  MOVFF  15,FF5
+009A:  MOVFF  16,FF6
+009E:  MOVFF  17,FF7
+00A2:  MOVF   04,W
+00A4:  MOVFF  06,FE0
+00A8:  MOVFF  05,FD8
+00AC:  RETFIE 0
+.................... #include <robotis.h> 
+.................... #include <18LF14K50.h> 
+.................... //////////// Standard Header file for the PIC18LF14K50 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC18LF14K50 
+*
+0170:  MOVF   xBB,W
+0172:  MULWF  xBD
+0174:  MOVFF  FF3,01
+0178:  MOVFF  FF4,00
+017C:  MULWF  xBE
+017E:  MOVF   FF3,W
+0180:  ADDWF  00,F
+0182:  MOVF   xBC,W
+0184:  MULWF  xBD
+0186:  MOVF   FF3,W
+0188:  ADDWFC 00,W
+018A:  MOVWF  02
+018C:  RETURN 0
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+....................  
+.................... #FUSES WDT                   	//Watch Dog Timer 
+.................... #FUSES WDT32                 	//Watch Dog Timer uses 1:32 Postscale 
+.................... #FUSES CPUDIV1					// No Clock Devide 12Mhz 
+.................... #FUSES USBDIV1					// USB Clock Source No Devide 
+.................... #FUSES HS						// External HighSpeed Crystal 
+.................... #FUSES PLLEN					// 4 x PLL Enable 
+.................... #FUSES PCLKEN					// USE Primary Clock 
+.................... #FUSES PUT						// Power Up timer Enable 
+.................... #FUSES BROWNOUT					// Enable Brown Out 
+.................... #FUSES BORV27					// Brown out volt = 2.7V 
+.................... #FUSES NOMCLR					// No MCLR, we use PA3 
+.................... #FUSES PROTECT					// Code Protect 
+....................  
+.................... #use delay(clock=48MHz,crystal=12MHz,USB_FULL,restart_wdt) 
+*
+0586:  MOVLW  01
+0588:  SUBWF  xB3,F
+058A:  BNC   05A6
+058C:  CLRF   FEA
+058E:  MOVLW  B3
+0590:  MOVWF  FE9
+0592:  MOVF   FEF,W
+0594:  BZ    05A6
+0596:  MOVLW  02
+0598:  MOVWF  00
+059A:  DECFSZ 00,F
+059C:  BRA    059A
+059E:  NOP   
+05A0:  CLRWDT
+05A2:  DECFSZ FEF,F
+05A4:  BRA    0596
+05A6:  RETURN 0
+*
+063A:  CLRF   FEA
+063C:  MOVLW  A7
+063E:  MOVWF  FE9
+0640:  MOVF   FEF,W
+0642:  BZ    0664
+0644:  MOVLW  0F
+0646:  MOVWF  01
+0648:  MOVLW  BF
+064A:  MOVWF  00
+064C:  CLRWDT
+064E:  DECFSZ 00,F
+0650:  BRA    064C
+0652:  DECFSZ 01,F
+0654:  BRA    0648
+0656:  MOVLW  8F
+0658:  MOVWF  00
+065A:  DECFSZ 00,F
+065C:  BRA    065A
+065E:  CLRWDT
+0660:  DECFSZ FEF,F
+0662:  BRA    0644
+0664:  RETURN 0
+....................  
+....................  
+.................... #include <stdio.h> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _STDIO 
+.................... #define _STDIO 
+.................... #include <string.h> 
+.................... //////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2008 Custom Computer Services            //// 
+.................... //// This source code may only be used by licensed users of the CCS C   //// 
+.................... //// compiler.  This source code may only be distributed to other       //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction  //// 
+.................... //// or distribution is permitted without written permission.           //// 
+.................... //// Derivative programs created using this software in object code     //// 
+.................... //// form are not restricted in any way.                                //// 
+.................... //////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _STRING 
+.................... #define _STRING 
+.................... #include <stddef.h> 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _STDDEF 
+....................  
+.................... #define _STDDEF 
+....................  
+.................... #if sizeof(unsigned int8 *)==1 
+.................... #define ptrdiff_t unsigned int8 
+.................... #else 
+.................... #define ptrdiff_t unsigned int16 
+.................... #endif 
+....................  
+.................... #if defined(__PCB__) || defined(__PCM__) 
+.................... #define size_t unsigned int8 
+.................... #else 
+.................... #define size_t unsigned int16 
+.................... #endif 
+.................... #define wchar_t char 
+.................... #define NULL 0 
+....................  
+.................... #define offsetof(s,f) (offsetofbit(s,f)/8) 
+....................  
+.................... #endif 
+....................  
+.................... #include <ctype.h> 
+.................... //////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2003 Custom Computer Services            //// 
+.................... //// This source code may only be used by licensed users of the CCS C   //// 
+.................... //// compiler.  This source code may only be distributed to other       //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction  //// 
+.................... //// or distribution is permitted without written permission.           //// 
+.................... //// Derivative programs created using this software in object code     //// 
+.................... //// form are not restricted in any way.                                //// 
+.................... //////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... #ifndef _CTYPE 
+.................... #define _CTYPE 
+....................  
+.................... #define islower(x)  isamong(x,"abcdefghijklmnopqrstuvwxyz") 
+.................... #define isupper(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZ") 
+.................... #define isalnum(x)  isamong(x,"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") 
+.................... #define isalpha(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz") 
+.................... #define isdigit(x)  isamong(x,"0123456789") 
+.................... #define isspace(x)  ((x)==' ') 
+.................... #define isxdigit(x) isamong(x,"0123456789ABCDEFabcdef") 
+.................... #define iscntrl(x)  ((x)<' ') 
+.................... #define isprint(x)  ((x)>=' ') 
+.................... #define isgraph(x)  ((x)>' ') 
+.................... #define ispunct(x)  (((x)>' ')&&!isalnum(x)) 
+....................  
+.................... #endif 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... ////////////////////////////////////////////// 
+.................... //// Uncomment the following define to    //// 
+.................... //// allow some functions to use a        //// 
+.................... //// quicker algorithm, but use more ROM  //// 
+.................... ////                                      //// 
+.................... //// #define FASTER_BUT_MORE_ROM          //// 
+.................... ////////////////////////////////////////////// 
+....................  
+....................  
+....................  
+.................... /*Copying functions*/ 
+.................... /* standard template: 
+....................    void *memmove(void *s1, void *s2, size_t n). 
+....................    Copies max of n characters safely (not following ending '\0') 
+....................    from s2 in s1; if s2 has less than n characters, appends 0 */ 
+....................  
+.................... unsigned char *memmove(void *s1,void *s2,size_t n) 
+.................... { 
+....................    unsigned char *sc1; 
+....................    unsigned char *sc2; 
+....................    sc1=s1; 
+....................    sc2=s2; 
+....................    if(sc2<sc1 && sc1 <sc2 +n) 
+....................       for(sc1+=n,sc2+=n;0<n;--n) 
+....................          *--sc1=*--sc2; 
+....................    else 
+....................       for(;0<n;--n) 
+....................          *sc1++=*sc2++; 
+....................   return s1; 
+....................   } 
+....................  
+.................... /* Standard template: char *strcpy(char *s1, const char *s2) 
+....................    copies the string s2 including the null character to s1. 
+....................    This is a compiler built in to handle the different address 
+....................    spaces */ 
+....................  
+.................... #define strcopy strcpy 
+....................  
+.................... /* standard template: 
+....................    char *strncpy(char *s1, const char *s2, size_t n). 
+....................    Copies max of n characters (not following ending '\0') 
+....................    from s2 in s1; if s2 has less than n characters, appends 0 */ 
+....................  
+.................... unsigned char *strncpy(unsigned char *s1, unsigned char *s2, size_t n) 
+.................... { 
+....................   unsigned char *s; 
+....................  
+....................   for (s = s1; n > 0 && *s2 != '\0'; n--) 
+....................      *s++ = *s2++; 
+....................   for (; n > 0; n--) 
+....................      *s++ = '\0'; 
+....................  
+....................   return(s1); 
+.................... } 
+.................... /***********************************************************/ 
+....................  
+.................... /*concatenation functions*/ 
+.................... /* standard template: char *strcat(char *s1, const char *s2) 
+.................... appends s2 to s1*/ 
+....................  
+.................... unsigned char *strcat(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *s; 
+....................  
+....................    for (s = s1; *s != '\0'; ++s); 
+....................    while(*s2 != '\0') 
+....................    { 
+....................       *s = *s2; 
+....................       ++s; 
+....................       ++s2; 
+....................    } 
+....................  
+....................    *s = '\0'; 
+....................    return(s1); 
+.................... } 
+.................... /* standard template: char *strncat(char *s1, char *s2,size_t n) 
+.................... appends not more than n characters from s2 to s1*/ 
+....................  
+.................... unsigned char *strncat(unsigned char *s1, unsigned char *s2, size_t n) 
+.................... { 
+....................    unsigned char *s; 
+....................  
+....................    for (s = s1; *s != '\0'; ++s); 
+....................    while(*s2 != '\0' && 0<n) 
+....................    { 
+....................       *s = *s2; 
+....................       ++s; 
+....................       ++s2; 
+....................       --n; 
+....................    } 
+....................  
+....................    *s = '\0'; 
+....................    return(s1); 
+.................... } 
+....................  
+.................... /***********************************************************/ 
+....................  
+....................  
+.................... /*comparison functions*/ 
+.................... /* standard template: signed int memcmp(void *s1, void *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 memcmp(void * s1,void *s2,size_t n) 
+.................... { 
+.................... unsigned char *su1, *su2; 
+.................... for(su1=s1, su2=s2; 0<n; ++su1, ++su2, --n) 
+.................... { 
+....................    if(*su1!=*su2) 
+....................       return ((*su1<*su2)?-1:1); 
+.................... } 
+.................... return 0; 
+.................... } 
+....................  
+.................... /* standard template: int strcmp(const char *s1, const char *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 strcmp(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    for (; *s1 == *s2; s1++, s2++) 
+....................       if (*s1 == '\0') 
+....................          return(0); 
+....................    return((*s1 < *s2) ? -1: 1); 
+.................... } 
+.................... /* standard template: int strcoll(const char *s1, const char *s2). 
+....................    Compares s1 & s2; returns -1 if s1<s2, 0 if s1=s2, 1 if s1>s2 */ 
+....................  
+.................... signed int8 strcoll(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    for (; *s1 == *s2; s1++, s2++) 
+....................       if (*s1 == '\0') 
+....................          return(0); 
+....................    return((*s1 < *s2) ? -1: 1); 
+.................... } 
+....................  
+.................... /* standard template: 
+....................    int strncmp(const char *s1, const char *s2, size_t n). 
+....................    Compares max of n characters (not following 0) from s1 to s2; 
+....................    returns same as strcmp */ 
+....................  
+.................... signed int8 strncmp(unsigned char *s1, unsigned char *s2, size_t n) 
+.................... { 
+....................    for (; n > 0; s1++, s2++, n--) 
+....................       if (*s1 != *s2) 
+....................          return((*s1 <*s2) ? -1: 1); 
+....................       else if (*s1 == '\0') 
+....................          return(0); 
+....................    return(0); 
+.................... } 
+.................... /* standard template: 
+....................    int strxfrm(const char *s1, const char *s2, size_t n). 
+....................    transforms maximum of n characters from s2 and places them into s1, returns number of chars written ot s1. 
+....................    if s1 is NULL and n is 0, then it returns the length of s2.*/ 
+.................... size_t strxfrm(unsigned char *s1, unsigned char *s2, size_t n) 
+.................... { 
+....................    unsigned char c; 
+....................    unsigned int8 n1; 
+....................     
+....................    if (!s1 && !n) 
+....................       n = -1; //find length 
+....................  
+....................    n1 = 0; 
+....................     
+....................    for (; n1 < n; n1++) 
+....................    { 
+....................       c = *s2++; 
+....................       if (!c) 
+....................          break; 
+....................       if (s1) 
+....................          *s1++ = c; 
+....................    } 
+....................  
+....................   return(n1); 
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... /***********************************************************/ 
+.................... /*Search functions*/ 
+.................... /* standard template: void *memchr(const char *s, int c). 
+....................    Finds first occurrence of c in n characters of s */ 
+....................  
+.................... unsigned char *memchr(void *s,unsigned int8 c,size_t n) 
+.................... { 
+....................    unsigned char uc; 
+....................    unsigned char *su; 
+....................    uc=c; 
+....................    for(su=s;0<n;++su,--n) 
+....................       if(*su==uc) 
+....................       return su; 
+....................    return NULL; 
+.................... } 
+....................  
+.................... /* standard template: char *strchr(const char *s, int c). 
+....................    Finds first occurrence of c in s */ 
+....................  
+.................... unsigned char *strchr(unsigned char *s, unsigned int8 c) 
+.................... { 
+....................    for (; *s != c; s++) 
+....................       if (*s == '\0') 
+....................          return(0); 
+....................    return(s); 
+.................... } 
+.................... /* standard template: 
+....................    size_t strcspn(const char *s1, const char *s2). 
+....................    Computes length of max initial segment of s1 that 
+....................    consists entirely of characters NOT from s2*/ 
+....................  
+.................... unsigned int8  strcspn(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; *sc2 != 0; sc2++) 
+....................          if (*sc1 == *sc2) 
+....................             return(sc1 - s1); 
+....................    return(sc1 - s1); 
+.................... } 
+.................... /* standard template: 
+....................    char *strpbrk(const char *s1, const char *s2). 
+....................    Locates first occurence of any character from s2 in s1; 
+....................    returns s1 if s2 is empty string */ 
+....................  
+.................... unsigned char *strpbrk(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; *sc2 != 0; sc2++) 
+....................          if (*sc1 == *sc2) 
+....................             return(sc1); 
+....................    return(0); 
+.................... } 
+....................  
+....................  
+.................... /* standard template: char *strrchr(const char *s, int c). 
+....................    Finds last occurrence of c in s */ 
+....................  
+.................... unsigned char *strrchr(unsigned char *s, unsigned int8 c) 
+.................... { 
+....................    unsigned char *p; 
+....................  
+....................    for (p = 0; ; s++) 
+....................    { 
+....................       if (*s == c) 
+....................          p = s; 
+....................       if (*s == '\0') 
+....................          return(p); 
+....................    } 
+.................... } 
+.................... /* computes length of max initial segment of s1 consisting 
+....................    entirely of characters from s2 */ 
+....................  
+.................... unsigned int8  strspn(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *sc1, *sc2; 
+....................  
+....................    for (sc1 = s1; *sc1 != 0; sc1++) 
+....................       for (sc2 = s2; ; sc2++) 
+....................     if (*sc2 == '\0') 
+....................        return(sc1 - s1); 
+....................          else if (*sc1 == *sc2) 
+....................             break; 
+....................    return(sc1 - s1); 
+.................... } 
+.................... /* standard template: 
+....................    char *strstr(const char *s1, const char *s2); 
+....................    Locates first occurence of character sequence s2 in s1; 
+....................    returns 0 if s2 is empty string 
+....................  
+....................    Uncomment #define FASTER_BUT_MORE_ROM at the top of the 
+....................    file to use the faster algorithm */ 
+.................... unsigned char *strstr(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *s, *t; 
+....................  
+....................    #ifdef FASTER_BUT_MORE_ROM 
+....................    if (*s2 == '\0') 
+....................          return(s1); 
+....................    #endif 
+....................  
+....................    while (*s1) 
+....................    { 
+....................       for(s = s1, t = s2; *t && (*s == *t); ++s, ++t); 
+....................  
+....................       if (*t == '\0') 
+....................          return s1; 
+....................       ++s1; 
+....................       #ifdef FASTER_BUT_MORE_ROM 
+....................          while(*s1 != '\0' && *s1 != *s2) 
+....................             ++s1; 
+....................       #endif 
+....................    } 
+....................    return 0; 
+.................... } 
+....................  
+.................... /* standard template: size_t strlen(const char *s). 
+....................    Computes length of s1 (preceding terminating 0) */ 
+....................  
+.................... size_t strlen(unsigned char *s) 
+.................... { 
+....................    unsigned char *sc; 
+....................  
+....................    for (sc = s; *sc != 0; sc++); 
+....................    return(sc - s); 
+.................... } 
+....................  
+.................... /* standard template: char *strtok(char *s1, const char *s2). 
+....................  
+....................    Finds next token in s1 delimited by a character from separator 
+....................    string s2 (which can be different from call to call).  First call 
+....................    starts at beginning of s1 searching for first character NOT 
+....................    contained in s2; returns 0 if none is found. 
+....................    If one is found, it is the start of first token (return value). 
+....................    Function then searches from there for a character contained in s2. 
+....................    If none is found, current token extends to end of s1, and subsequent 
+....................    searches for a token will return 0.  If one is found, it is 
+....................    overwritten by '\0', which terminates current token.  Function saves 
+....................    pointer to following character from which next search will start. 
+....................    Each subsequent call, with 0 as first argument, starts searching 
+....................    from saved pointer */ 
+....................  
+.................... unsigned char *strtok(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................    unsigned char *beg, *end; 
+....................    static char *save; 
+....................  
+....................    beg = (s1)? s1: save; 
+....................    beg += strspn(beg, s2); 
+....................    if (*beg == '\0') 
+....................       return(0); 
+....................        
+....................    end = strpbrk(beg, s2); 
+....................    if (end != '\0') 
+....................    { 
+....................       *end = '\0'; 
+....................       end++; 
+....................       save = end; 
+....................    } 
+....................    else 
+....................       save = beg + strlen(beg); 
+....................     
+....................    return(beg); 
+.................... } 
+....................  
+.................... /*****************************************************************/ 
+.................... /*Miscellaneous functions*/ 
+.................... /* standard template 
+.................... maps error number in errnum to an error message string 
+.................... Returns: Pointer to string 
+.................... */ 
+.................... #ifdef _ERRNO 
+.................... unsigned char * strerror(unsigned int8 errnum) 
+.................... { 
+.................... static unsigned char s[13]; 
+.................... switch( errnum) 
+.................... { 
+.................... case 0: 
+....................    strcpy(s,"no errors"); 
+....................    return s; 
+.................... case EDOM : 
+....................    strcpy(s,"domain error"); 
+....................    return s; 
+.................... case ERANGE: 
+....................    strcpy(s,"range error"); 
+....................    return s; 
+.................... } 
+.................... } 
+.................... #ENDIF 
+....................  
+.................... /* standard template: size_t stricmp(const char *s1, const char *s2). 
+....................    Compares s1 to s2 ignoring case (upper vs. lower) */ 
+....................  
+.................... signed int8 stricmp(unsigned char *s1, unsigned char *s2) 
+.................... { 
+....................  for(; *s1==*s2||(isalpha(*s1)&&isalpha(*s2)&&(*s1==*s2+32||*s2==*s1+32)); 
+....................     s1++, s2++) 
+....................     if (*s1 == '\0') 
+....................        return(0); 
+....................  return((*s1 < *s2) ? -1: 1); 
+.................... } 
+....................  
+....................  
+.................... /* standard template: char *strlwr(char *s). 
+....................    Replaces uppercase letters by lowercase; 
+....................    returns pointer to new string s */ 
+....................  
+.................... unsigned char *strlwr(unsigned char *s) 
+.................... { 
+....................    unsigned char *p; 
+....................  
+....................    for (p = s; *p != '\0'; p++) 
+....................       if (*p >= 'A' && *p <='Z') 
+....................          *p += 'a' - 'A'; 
+....................    return(s); 
+.................... } 
+....................  
+.................... /* standard template: char *strupr(char *s). 
+....................    Replaces lowercase letters by upercase; 
+....................    returns pointer to new string s */ 
+....................  
+.................... unsigned char *strupr(unsigned char *s) 
+.................... { 
+....................    unsigned char *p; 
+....................  
+....................    for (p = s; *p != '\0'; p++) 
+....................       if (*p >= 'a' && *p <='z') 
+....................          *p -= 'a' - 'A'; 
+....................    return(s); 
+.................... } 
+....................  
+....................  
+.................... /************************************************************/ 
+....................  
+....................  
+.................... #endif 
+....................  
+.................... #ifndef getc 
+.................... #define getc getch 
+.................... #define getchar getch 
+.................... #define puts(s) {printf(s); putchar(13); putchar(10);} 
+.................... #define putc putchar 
+.................... #endif 
+.................... /* maps error number to an error message. Writes a sequence of characters to 
+.................... stderr stream thus: if s is not null then string pointed to by s follwed by 
+.................... a colon (:) and a space and the appropriate error message returned by strerror 
+.................... function with argument errno 
+....................  
+.................... Returns: no value 
+.................... */ 
+....................  
+.................... #ifdef _ERRNO 
+.................... void perror(char *s) 
+.................... { 
+....................   if(s) 
+....................   fprintf(STDERR,"%s: ",s); 
+....................   fprintf(STDERR,"%s\r\n",strerror(errno)); 
+.................... } 
+.................... #endif 
+.................... #endif 
+....................  
+.................... #include "gpio.c" 
+.................... typedef enum {PORTA,PORTB,PORTC}GPIOPort; 
+.................... typedef enum {GPIO_Pin0=0x01,GPIO_Pin1=0x02,GPIO_Pin2=0x04,GPIO_Pin3=0x08,GPIO_Pin4=0x10,GPIO_Pin5=0x20,GPIO_Pin6=0x40,GPIO_Pin7=0x80}GPIOPins; 
+.................... typedef enum {OUT,IN}GPIOMode; 
+.................... typedef enum {NOPU,PULLUP}GPIOPU; 
+....................  
+....................  
+.................... typedef struct { 
+.................... 	unsigned char GPIO_Pin; 
+.................... 	GPIOMode	GPIO_Mode; 
+.................... 	GPIOPU		GPIO_PU; 
+.................... }GPIO_InitTypeDef; 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... void GPIO_Init(unsigned char Port, GPIO_InitTypeDef* GPIO_Init_Struct) 
+.................... { 
+.................... 	unsigned char *tris; 
+.................... 	unsigned char mask; 
+.................... 	 
+.................... 	if (Port == PORTA) { 
+*
+010A:  MOVF   xAA,F
+010C:  BNZ   0118
+.................... 		tris = 0xf92;	 
+010E:  MOVLW  0F
+0110:  MOVWF  xAE
+0112:  MOVLW  92
+0114:  MOVWF  xAD
+.................... 	}else if (Port == PORTB) { 
+0116:  BRA    012E
+0118:  DECFSZ xAA,W
+011A:  BRA    0126
+.................... 		tris = 0xf93; 
+011C:  MOVLW  0F
+011E:  MOVWF  xAE
+0120:  MOVLW  93
+0122:  MOVWF  xAD
+.................... 	}else {	// PortC 
+0124:  BRA    012E
+.................... 		tris = 0xf94; 
+0126:  MOVLW  0F
+0128:  MOVWF  xAE
+012A:  MOVLW  94
+012C:  MOVWF  xAD
+.................... 	} 
+....................  	mask = GPIO_Init_Struct->GPIO_Pin; 
+012E:  MOVFF  AB,FE9
+0132:  MOVFF  AC,FEA
+0136:  MOVFF  FEF,AF
+....................  
+.................... 	if (GPIO_Init_Struct->GPIO_Mode == IN) { 
+013A:  MOVLW  01
+013C:  ADDWF  xAB,W
+013E:  MOVWF  FE9
+0140:  MOVLW  00
+0142:  ADDWFC xAC,W
+0144:  MOVWF  FEA
+0146:  MOVF   FEF,W
+0148:  ANDLW  01
+014A:  SUBLW  01
+014C:  BNZ   015E
+.................... 		*tris |= mask; 
+014E:  MOVFF  AD,FE9
+0152:  MOVFF  AE,FEA
+0156:  MOVF   FEF,W
+0158:  IORWF  xAF,W
+015A:  MOVWF  FEF
+.................... 	}else { 
+015C:  BRA    016E
+.................... 		*tris &= ~mask; 
+015E:  MOVFF  AD,FE9
+0162:  MOVFF  AE,FEA
+0166:  MOVF   xAF,W
+0168:  XORLW  FF
+016A:  ANDWF  FEF,W
+016C:  MOVWF  FEF
+.................... 	} 
+016E:  RETURN 0
+.................... } 
+....................  
+....................  
+.................... void GPIO_DeInit(GPIOPort Port) 
+.................... { 
+.................... 	unsigned char	*latchAddr; 
+.................... 	unsigned char 	*tris; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		latchAddr = 0xf89; 
+.................... 		tris = 0xf92;	 
+.................... 	}else if (Port == PORTB) { 
+.................... 		latchAddr = 0xf8a; 
+.................... 		tris = 0xf93; 
+.................... 	}else {	// PortC 
+.................... 		latchAddr = 0xf8b; 
+.................... 		tris = 0xf94; 
+.................... 	} 
+.................... 	*latchAddr= 0; 
+.................... 	*tris = 0xff; 
+.................... } 
+....................  
+....................  
+....................  
+.................... void GPIO_Write(GPIOPort Port, unsigned char portVal) 
+.................... { 
+.................... 	unsigned char *portAddr; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		portAddr = 0xf80;	 
+.................... 	}else if (Port == PORTB) { 
+.................... 		portAddr = 0xf81; 
+.................... 	}else {	// PortC 
+.................... 		portAddr = 0xf82; 
+.................... 	} 
+.................... 	*portAddr = portVal; 
+.................... } 
+....................  
+.................... void GPIO_WriteBit(GPIOPort Port, unsigned char GPIO_pin, char bitVal) 
+.................... { 
+.................... 	unsigned char	latchData; 
+.................... 	unsigned char	*latchAddr; 
+.................... 	unsigned char 	*portAddr; 
+....................  
+.................... 	if (Port == PORTA) { 
+*
+048C:  MOVF   xA8,F
+048E:  BNZ   04A2
+.................... 		portAddr = 0xf80;	 
+0490:  MOVLW  0F
+0492:  MOVWF  xAF
+0494:  MOVLW  80
+0496:  MOVWF  xAE
+.................... 		latchAddr = 0xf89; 
+0498:  MOVLW  0F
+049A:  MOVWF  xAD
+049C:  MOVLW  89
+049E:  MOVWF  xAC
+.................... 	}else if (Port == PORTB) { 
+04A0:  BRA    04C8
+04A2:  DECFSZ xA8,W
+04A4:  BRA    04B8
+.................... 		portAddr = 0xf81; 
+04A6:  MOVLW  0F
+04A8:  MOVWF  xAF
+04AA:  MOVLW  81
+04AC:  MOVWF  xAE
+.................... 		latchAddr = 0xf8a; 
+04AE:  MOVLW  0F
+04B0:  MOVWF  xAD
+04B2:  MOVLW  8A
+04B4:  MOVWF  xAC
+.................... 	}else {	// PortC 
+04B6:  BRA    04C8
+.................... 		portAddr = 0xf82; 
+04B8:  MOVLW  0F
+04BA:  MOVWF  xAF
+04BC:  MOVLW  82
+04BE:  MOVWF  xAE
+.................... 		latchAddr = 0xf8b; 
+04C0:  MOVLW  0F
+04C2:  MOVWF  xAD
+04C4:  MOVLW  8B
+04C6:  MOVWF  xAC
+.................... 	} 
+.................... 	latchData = *latchAddr;		// Read current Out data on the latch 
+04C8:  MOVFF  AC,FE9
+04CC:  MOVFF  AD,FEA
+04D0:  MOVFF  FEF,AB
+.................... 	if (bitVal) { 
+04D4:  MOVF   xAA,F
+04D6:  BZ    04EA
+.................... 		latchData |= GPIO_pin; 
+04D8:  MOVF   xA9,W
+04DA:  IORWF  xAB,F
+.................... 		*portAddr = latchData;  
+04DC:  MOVFF  AE,FE9
+04E0:  MOVFF  AF,FEA
+04E4:  MOVFF  AB,FEF
+.................... 	}else { 
+04E8:  BRA    04FC
+.................... 		latchData &= ~GPIO_pin; 
+04EA:  MOVF   xA9,W
+04EC:  XORLW  FF
+04EE:  ANDWF  xAB,F
+.................... 		*portAddr = latchData; 
+04F0:  MOVFF  AE,FE9
+04F4:  MOVFF  AF,FEA
+04F8:  MOVFF  AB,FEF
+.................... 	}	 
+04FC:  RETURN 0
+.................... } 
+....................  
+....................  
+.................... unsigned char GPIO_ReadData(GPIOPort Port) 
+.................... { 
+.................... 	unsigned char *portAddr; 
+.................... 	unsigned char retData; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		portAddr = 0xf80;	 
+.................... 	}else if (Port == PORTB) { 
+.................... 		portAddr = 0xf81; 
+.................... 	}else {	// PortC 
+.................... 		portAddr = 0xf82; 
+.................... 	} 
+.................... 	retData = *portAddr; 
+.................... 	return retData; 
+.................... } 
+....................  
+....................  
+.................... unsigned char GPIO_ReadInputData(GPIOPort Port) 
+.................... { 
+.................... 	unsigned char *tris; 
+.................... 	unsigned char retData, mask; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		tris = 0xf92;	 
+.................... 	}else if (Port == PORTB) { 
+.................... 		tris = 0xf93; 
+.................... 	}else {				// PortC 
+.................... 		tris = 0xf94; 
+.................... 	} 
+....................  
+.................... 	retData =  GPIO_ReadData(Port); 
+.................... 	mask = *tris; 
+.................... 	retData &= mask; 
+....................  
+.................... 	return retData; 
+.................... } 
+....................  
+.................... char GPIO_ReadInputDataBit(GPIOPort Port, unsigned char GPIO_pin) 
+.................... { 
+.................... 	unsigned char retData; 
+....................  
+.................... 	retData = GPIO_ReadData(Port); 
+.................... 	retData &= GPIO_pin;	// Test Selected Bit 
+....................  
+.................... 	if (retData) return 1; 
+.................... 	else return 0; 
+.................... } 
+....................  
+....................  
+.................... unsigned char GPIO_ReadLatch(GPIOPort Port) 
+.................... { 
+.................... 	unsigned char *latchAddr; 
+.................... 	unsigned char retData; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		latchAddr = 0xf89; 
+.................... 	}else if (Port == PORTB) { 
+.................... 		latchAddr = 0xf8a; 
+.................... 	}else {	// PortC 
+.................... 		latchAddr = 0xf8b; 
+.................... 	} 
+....................  
+.................... 	retData = *latchAddr; 
+.................... 	return retData; 
+.................... } 
+....................  
+....................  
+.................... unsigned char GPIO_ReadOutputData(GPIOPort Port) 
+.................... { 
+.................... 	unsigned char *tris; 
+.................... 	unsigned char retData, mask; 
+....................  
+.................... 	if (Port == PORTA) { 
+.................... 		tris = 0xf92;	 
+.................... 	}else if (Port == PORTB) { 
+.................... 		tris = 0xf93; 
+.................... 	}else {				// PortC 
+.................... 		tris = 0xf94; 
+.................... 	} 
+....................  
+.................... 	retData =  GPIO_ReadLatch(Port); 
+.................... 	mask = *tris; 
+.................... 	retData &= (~mask); 
+....................  
+.................... 	return retData; 
+.................... } 
+....................  
+.................... char GPIO_ReadOutputDataBit(GPIOPort Port, unsigned char GPIO_pin) 
+.................... { 
+.................... 	unsigned char retData; 
+....................  
+.................... 	retData = GPIO_ReadLatch(Port); 
+.................... 	retData &= GPIO_pin;	// Test Selected Bit 
+....................  
+.................... 	if (retData) return 1; 
+.................... 	else return 0; 
+.................... } 
+....................  
+....................  
+.................... void GPIO_ResetBits(GPIOPort Port, unsigned char GPIO_pin) 
+.................... { 
+.................... 	GPIO_WriteBit(Port, GPIO_pin, 0); 
+*
+0666:  MOVFF  A6,A8
+066A:  MOVFF  A7,A9
+066E:  CLRF   xAA
+0670:  RCALL  048C
+0672:  GOTO   06AA (RETURN)
+.................... } 
+....................  
+....................  
+.................... void GPIO_SetBits(GPIOPort Port, unsigned char GPIO_pin) 
+.................... { 
+.................... 	GPIO_WriteBit(Port, GPIO_pin, 1); 
+*
+04FE:  MOVFF  A6,A8
+0502:  MOVFF  A7,A9
+0506:  MOVLW  01
+0508:  MOVWF  xAA
+050A:  RCALL  048C
+050C:  GOTO   0680 (RETURN)
+.................... } 
+....................  
+.................... 	 
+....................  
+.................... #include "uart.c" 
+.................... typedef enum {BAUD_300=39999,BAUD_1200=9999, BAUD_2400=4999, BAUD_9600=1249, BAUD_10417=1151, BAUD_19200=624, BAUD_38400 = 312, BAUD_57600=207, BAUD_115200=103}USARTBaud; 
+.................... typedef enum {USART_DataLength_8b, USART_DataLength_9b}USARTDataLength; 
+.................... typedef enum {USART_StopBits_1, USART_StopBits_1_5, USART_StopBits_2}USARTStopBits; 
+.................... typedef enum {USART_Parity_No, USART_Parity_Even, USART_Parity_Odd}USARTParity; 
+.................... typedef enum {USART_Mode_Tx=0x20, USART_Mode_Rx=0x10}USARTMode; 
+.................... typedef enum {USART_IT_TXE=0x10, USART_IT_RXNE=0x20}USARTIT; 
+.................... typedef enum {DISABLE, ENABLE}FunctionalState; 
+....................  
+....................  
+.................... typedef struct { 
+.................... 	unsigned long	USART_BaudRate; 
+.................... 	char			USART_DataLength; 
+.................... 	char			USART_StopBits; 
+.................... 	char			USART_Parity; 
+.................... 	char			USART_Mode; 
+.................... }USART_InitTypeDef; 
+....................  
+....................  
+.................... // Since we do not have hw Parity and hw Stopbit Control 
+.................... // We need to Save them as a global variables 
+.................... unsigned char gUSART_StopBits=0, gUSART_Parity=0; 
+.................... unsigned long gUSART_delay=0; 
+....................  
+.................... // Rx Buffer related Variables 
+.................... #define MAX_DATA	128 
+.................... unsigned char USART_Buf[MAX_DATA]; 
+.................... unsigned int rxHead=0, rxTail=0, rxCount=0; 
+....................  
+....................  
+....................  
+.................... void USART_Cmd(FunctionalState fs) 
+.................... { 
+.................... 	unsigned char *rcsta; 
+.................... 	char cmData; 
+.................... 	 
+.................... 	rcsta = 0xfab;				// control register addr 
+*
+03EC:  MOVLW  0F
+03EE:  MOVWF  xAC
+03F0:  MOVLW  AB
+03F2:  MOVWF  xAB
+....................  
+.................... 	if (fs == ENABLE) {					 
+03F4:  DECFSZ xAA,W
+03F6:  BRA    0414
+.................... 		cmData = *rcsta; 
+03F8:  MOVFF  AB,FE9
+03FC:  MOVFF  AC,FEA
+0400:  MOVFF  FEF,AD
+.................... 		cmData |= 0x80; 
+0404:  BSF    xAD.7
+.................... 		*rcsta = cmData;		// Serial Modeule Enable, TxD/RxD pins are set by UART 
+0406:  MOVFF  AB,FE9
+040A:  MOVFF  AC,FEA
+040E:  MOVFF  AD,FEF
+.................... 	}else{ 
+0412:  BRA    042E
+.................... 		cmData = *rcsta; 
+0414:  MOVFF  AB,FE9
+0418:  MOVFF  AC,FEA
+041C:  MOVFF  FEF,AD
+.................... 		cmData &= 0x7f; 
+0420:  BCF    xAD.7
+.................... 		*rcsta = cmData;		// Serial Modeule disable, TxD/RxD pins are set by UART 
+0422:  MOVFF  AB,FE9
+0426:  MOVFF  AC,FEA
+042A:  MOVFF  AD,FEF
+.................... 	} 
+042E:  GOTO   0488 (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+....................  
+.................... void SetBaudRate(unsigned long baudRate) 
+.................... { 
+.................... 	unsigned char *spbrg, *spbrgh; 
+....................  
+.................... 	spbrg = 0xfaf; 
+*
+018E:  MOVLW  0F
+0190:  MOVWF  xB8
+0192:  MOVLW  AF
+0194:  MOVWF  xB7
+.................... 	spbrgh = 0xfb0; 
+0196:  MOVLW  0F
+0198:  MOVWF  xBA
+019A:  MOVLW  B0
+019C:  MOVWF  xB9
+....................  
+.................... 	*spbrg = (baudRate & 0x00ff); 
+019E:  MOVFF  B7,FE9
+01A2:  MOVFF  B8,FEA
+01A6:  MOVFF  B5,FEF
+.................... 	*spbrgh = ((baudRate>>8) & 0x00ff); 
+01AA:  MOVFF  B9,FE9
+01AE:  MOVFF  BA,FEA
+01B2:  MOVFF  B6,FEF
+....................  
+.................... 	if (gUSART_StopBits != USART_StopBits_1) { // When the Stop bit is bigger that 1 
+01B6:  MOVF   1B,F
+01B8:  BTFSC  FD8.2
+01BA:  BRA    030E
+....................  
+.................... 		gUSART_delay = (unsigned long) gUSART_StopBits;	// delay == 1 or 2 
+01BC:  CLRF   1E
+01BE:  MOVFF  1B,1D
+....................  
+.................... 		switch (baudRate) { 
+01C2:  MOVFF  B5,00
+01C6:  MOVFF  B6,03
+01CA:  MOVLW  9C
+01CC:  SUBWF  xB6,W
+01CE:  BNZ   01D6
+01D0:  MOVLW  3F
+01D2:  SUBWF  00,W
+01D4:  BZ    0234
+01D6:  MOVLW  27
+01D8:  SUBWF  03,W
+01DA:  BNZ   01E2
+01DC:  MOVLW  0F
+01DE:  SUBWF  00,W
+01E0:  BZ    0250
+01E2:  MOVLW  13
+01E4:  SUBWF  03,W
+01E6:  BNZ   01EE
+01E8:  MOVLW  87
+01EA:  SUBWF  00,W
+01EC:  BZ    026C
+01EE:  MOVLW  04
+01F0:  SUBWF  03,W
+01F2:  BNZ   01FA
+01F4:  MOVLW  E1
+01F6:  SUBWF  00,W
+01F8:  BZ    0286
+01FA:  MOVLW  04
+01FC:  SUBWF  03,W
+01FE:  BNZ   0206
+0200:  MOVLW  7F
+0202:  SUBWF  00,W
+0204:  BZ    02A0
+0206:  MOVLW  02
+0208:  SUBWF  03,W
+020A:  BNZ   0212
+020C:  MOVLW  70
+020E:  SUBWF  00,W
+0210:  BZ    02BA
+0212:  MOVLW  01
+0214:  SUBWF  03,W
+0216:  BNZ   021E
+0218:  MOVLW  38
+021A:  SUBWF  00,W
+021C:  BZ    02D4
+021E:  MOVF   03,W
+0220:  BNZ   0228
+0222:  MOVLW  CF
+0224:  SUBWF  00,W
+0226:  BZ    02EE
+0228:  MOVF   03,W
+022A:  BNZ   0232
+022C:  MOVLW  67
+022E:  SUBWF  00,W
+0230:  BZ    0300
+0232:  BRA    030E
+.................... 			case BAUD_300: 
+.................... 				gUSART_delay *= 1665; 
+0234:  MOVFF  1E,BC
+0238:  MOVFF  1D,BB
+023C:  MOVLW  06
+023E:  MOVWF  xBE
+0240:  MOVLW  81
+0242:  MOVWF  xBD
+0244:  RCALL  0170
+0246:  MOVFF  02,1E
+024A:  MOVFF  01,1D
+.................... 			break; 
+024E:  BRA    030E
+....................  
+.................... 			case BAUD_1200: 
+.................... 				gUSART_delay *= 415; 
+0250:  MOVFF  1E,BC
+0254:  MOVFF  1D,BB
+0258:  MOVLW  01
+025A:  MOVWF  xBE
+025C:  MOVLW  9F
+025E:  MOVWF  xBD
+0260:  RCALL  0170
+0262:  MOVFF  02,1E
+0266:  MOVFF  01,1D
+.................... 			break; 
+026A:  BRA    030E
+....................  
+.................... 			case BAUD_2400: 
+.................... 				gUSART_delay *= 208; 
+026C:  MOVFF  1E,BC
+0270:  MOVFF  1D,BB
+0274:  CLRF   xBE
+0276:  MOVLW  D0
+0278:  MOVWF  xBD
+027A:  RCALL  0170
+027C:  MOVFF  02,1E
+0280:  MOVFF  01,1D
+.................... 			break; 
+0284:  BRA    030E
+....................  
+.................... 			case BAUD_9600: 
+.................... 				gUSART_delay *= 52; 
+0286:  MOVFF  1E,BC
+028A:  MOVFF  1D,BB
+028E:  CLRF   xBE
+0290:  MOVLW  34
+0292:  MOVWF  xBD
+0294:  RCALL  0170
+0296:  MOVFF  02,1E
+029A:  MOVFF  01,1D
+.................... 			break; 
+029E:  BRA    030E
+....................  
+.................... 			case BAUD_10417: 
+.................... 				gUSART_delay *= 47; 
+02A0:  MOVFF  1E,BC
+02A4:  MOVFF  1D,BB
+02A8:  CLRF   xBE
+02AA:  MOVLW  2F
+02AC:  MOVWF  xBD
+02AE:  RCALL  0170
+02B0:  MOVFF  02,1E
+02B4:  MOVFF  01,1D
+.................... 			break; 
+02B8:  BRA    030E
+....................  
+.................... 			case BAUD_19200: 
+.................... 				gUSART_delay *= 26; 
+02BA:  MOVFF  1E,BC
+02BE:  MOVFF  1D,BB
+02C2:  CLRF   xBE
+02C4:  MOVLW  1A
+02C6:  MOVWF  xBD
+02C8:  RCALL  0170
+02CA:  MOVFF  02,1E
+02CE:  MOVFF  01,1D
+.................... 			break; 
+02D2:  BRA    030E
+....................  
+.................... 			case BAUD_38400: 
+.................... 				gUSART_delay *= 13; 
+02D4:  MOVFF  1E,BC
+02D8:  MOVFF  1D,BB
+02DC:  CLRF   xBE
+02DE:  MOVLW  0D
+02E0:  MOVWF  xBD
+02E2:  RCALL  0170
+02E4:  MOVFF  02,1E
+02E8:  MOVFF  01,1D
+.................... 			break; 
+02EC:  BRA    030E
+....................  
+.................... 			case BAUD_57600: 
+.................... 				gUSART_delay *= 8; 
+02EE:  RLCF   1D,F
+02F0:  RLCF   1E,F
+02F2:  RLCF   1D,F
+02F4:  RLCF   1E,F
+02F6:  RLCF   1D,F
+02F8:  RLCF   1E,F
+02FA:  MOVLW  F8
+02FC:  ANDWF  1D,F
+.................... 			break; 
+02FE:  BRA    030E
+....................  
+.................... 			case BAUD_115200: 
+.................... 				gUSART_delay *= 4; 
+0300:  RLCF   1D,F
+0302:  RLCF   1E,F
+0304:  RLCF   1D,F
+0306:  RLCF   1E,F
+0308:  MOVLW  FC
+030A:  ANDWF  1D,F
+.................... 			break; 
+030C:  BRA    030E
+....................  
+.................... 			default: 
+.................... 			break; 
+.................... 		} 
+.................... 	} 
+030E:  GOTO   0366 (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+....................  
+.................... void USART_Init(USART_InitTypeDef *USART_InitStruct) 
+.................... { 
+.................... 	unsigned char	*txsta, *rcsta; 
+.................... 	char dataLength, txmode, rxmode; 
+.................... 	 
+.................... 	txsta = 0xfac;								// Tx Control Register	 
+0312:  MOVLW  0F
+0314:  MOVWF  xAD
+0316:  MOVLW  AC
+0318:  MOVWF  xAC
+.................... 	rcsta = 0xfab;								// Rx Control Register 
+031A:  MOVLW  0F
+031C:  MOVWF  xAF
+031E:  MOVLW  AB
+0320:  MOVWF  xAE
+....................  
+.................... 	dataLength = USART_InitStruct->USART_DataLength; 
+0322:  MOVLW  02
+0324:  ADDWF  xAA,W
+0326:  MOVWF  FE9
+0328:  MOVLW  00
+032A:  ADDWFC xAB,W
+032C:  MOVWF  FEA
+032E:  MOVFF  FEF,B0
+.................... 	gUSART_Parity = USART_InitStruct->USART_Parity; 
+0332:  MOVLW  04
+0334:  ADDWF  xAA,W
+0336:  MOVWF  FE9
+0338:  MOVLW  00
+033A:  ADDWFC xAB,W
+033C:  MOVWF  FEA
+033E:  MOVFF  FEF,1C
+.................... 	gUSART_StopBits = USART_InitStruct->USART_StopBits; 
+0342:  MOVLW  03
+0344:  ADDWF  xAA,W
+0346:  MOVWF  FE9
+0348:  MOVLW  00
+034A:  ADDWFC xAB,W
+034C:  MOVWF  FEA
+034E:  MOVFF  FEF,1B
+....................  
+.................... 	SetBaudRate(USART_InitStruct->USART_BaudRate);	// Set BaudRate 
+0352:  MOVFF  AA,FE9
+0356:  MOVFF  AB,FEA
+035A:  MOVFF  FEC,B6
+035E:  MOVF   FED,F
+0360:  MOVFF  FEF,B5
+0364:  BRA    018E
+....................  
+.................... 	txmode = USART_InitStruct->USART_Mode & 0x20;		// Check Mode_tx 
+0366:  MOVLW  05
+0368:  ADDWF  xAA,W
+036A:  MOVWF  FE9
+036C:  MOVLW  00
+036E:  ADDWFC xAB,W
+0370:  MOVWF  FEA
+0372:  MOVF   FEF,W
+0374:  ANDLW  20
+0376:  MOVWF  xB1
+.................... 	rxmode = USART_InitStruct->USART_Mode & 0x10;		// Check Mode_rx 
+0378:  MOVLW  05
+037A:  ADDWF  xAA,W
+037C:  MOVWF  FE9
+037E:  MOVLW  00
+0380:  ADDWFC xAB,W
+0382:  MOVWF  FEA
+0384:  MOVF   FEF,W
+0386:  ANDLW  10
+0388:  MOVWF  xB2
+....................  
+.................... 	if (dataLength ==USART_DataLength_8b) {		// 8 data bits 
+038A:  MOVF   xB0,F
+038C:  BNZ   03CC
+.................... 		if (gUSART_Parity == USART_Parity_No) { // 8 data bits and no parity = Total 8 bits 
+038E:  MOVF   1C,F
+0390:  BNZ   03AE
+.................... 			*txsta = 0x04 | txmode;						// 8 bit transmit 
+0392:  MOVFF  AC,FE9
+0396:  MOVFF  AD,FEA
+039A:  MOVF   xB1,W
+039C:  IORLW  04
+039E:  MOVWF  FEF
+.................... 			*rcsta = 0x00 | rxmode;						// 8 bit receiver 
+03A0:  MOVFF  AE,FE9
+03A4:  MOVFF  AF,FEA
+03A8:  MOVFF  B2,FEF
+.................... 		}else{									// 8 data bits and 1 parity = total 9 bits 
+03AC:  BRA    03CA
+.................... 			*txsta = 0x44 | txmode;						// 9 bit transmit 
+03AE:  MOVFF  AC,FE9
+03B2:  MOVFF  AD,FEA
+03B6:  MOVF   xB1,W
+03B8:  IORLW  44
+03BA:  MOVWF  FEF
+.................... 			*rcsta = 0x41 | rxmode;						// 9 bit receiver 
+03BC:  MOVFF  AE,FE9
+03C0:  MOVFF  AF,FEA
+03C4:  MOVF   xB2,W
+03C6:  IORLW  41
+03C8:  MOVWF  FEF
+.................... 		} 
+.................... 	}else {										// 9 data bits,  parity control by user 
+03CA:  BRA    03E8
+.................... 		*txsta = 0x44 | txmode;						// 9 bit transmit 
+03CC:  MOVFF  AC,FE9
+03D0:  MOVFF  AD,FEA
+03D4:  MOVF   xB1,W
+03D6:  IORLW  44
+03D8:  MOVWF  FEF
+.................... 		*rcsta = 0x41 | rxmode;						// 9 bit receiver 
+03DA:  MOVFF  AE,FE9
+03DE:  MOVFF  AF,FEA
+03E2:  MOVF   xB2,W
+03E4:  IORLW  41
+03E6:  MOVWF  FEF
+.................... 	} 
+03E8:  GOTO   0482 (RETURN)
+.................... } 
+....................  
+....................  
+.................... void USART_ITConfig(USARTIT uIT, FunctionalState fs) 
+.................... { 
+.................... 	unsigned char *PIE1, *INTCON; 
+.................... 	unsigned td;	 
+....................  
+.................... 	PIE1= 0xfd9; 
+.................... 	INTCON = 0xff2; 
+....................  
+.................... 	td = *PIE1;			// Read Current Interrupt Status 
+.................... 	//td &= 0xc0;			// Initialize Control Interrupt bits 
+....................  
+.................... 	if (fs == ENABLE) {	// Enable Interrupt 
+.................... 		td |= uIT; 
+.................... 	}else {				// Disable Interrupt 
+.................... 		td &= (~fs); 
+.................... 	} 
+.................... 	*PIE1 = td;			// Update New Interrupt Status 
+....................  
+.................... 	td = *INTCON; 
+.................... 	td |=0xc0;			// Enable Global, and all Peripheral Intrerrupt 
+.................... } 
+....................  
+....................  
+....................  
+.................... unsigned char USART_ReceiveData() 
+.................... { 
+.................... 	unsigned char *rcreg, data; 
+....................  
+.................... 	rcreg = 0xfae; 
+*
+00AE:  MOVLW  0F
+00B0:  MOVWF  xC2
+00B2:  MOVLW  AE
+00B4:  MOVWF  xC1
+.................... 	data = *rcreg; 
+00B6:  MOVFF  C1,FE9
+00BA:  MOVFF  C2,FEA
+00BE:  MOVFF  FEF,C3
+....................  
+.................... 	return data; 
+00C2:  MOVFF  C3,01
+00C6:  GOTO   00F6 (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+....................  
+.................... unsigned char	evaluateParity(unsigned char data) 
+.................... { 
+.................... 	int i, count; 
+.................... 	unsigned char mask; 
+....................  
+.................... 	mask = 0x01; 
+*
+0510:  MOVLW  01
+0512:  MOVWF  xB5
+.................... 	count = 0; 
+0514:  CLRF   xB4
+.................... 	for(i=0;i<8;i++) { 
+0516:  CLRF   xB3
+0518:  MOVF   xB3,W
+051A:  SUBLW  07
+051C:  BNC   0538
+.................... 		mask <<= i; 
+051E:  MOVF   xB3,W
+0520:  MOVWF  01
+0522:  BZ    052C
+0524:  BCF    FD8.0
+0526:  RLCF   xB5,F
+0528:  DECFSZ 01,F
+052A:  BRA    0524
+.................... 		if (data & mask) count++; 
+052C:  MOVF   xB2,W
+052E:  ANDWF  xB5,W
+0530:  BZ    0534
+0532:  INCF   xB4,F
+0534:  INCF   xB3,F
+0536:  BRA    0518
+.................... 	} 
+.................... 	 
+.................... 	count %=2;			// maker it 0 or 1 
+0538:  MOVLW  01
+053A:  ANDWF  xB4,F
+....................  
+.................... 	if (gUSART_Parity== USART_Parity_Even) {	// Check if it Even 
+053C:  DECFSZ 1C,W
+053E:  BRA    0554
+.................... 		if (count) return 1;		// Result was odd  
+0540:  MOVF   xB4,F
+0542:  BZ    054C
+0544:  MOVLW  01
+0546:  MOVWF  01
+0548:  BRA    0564
+054A:  BRA    0552
+.................... 		else return 0;				// Result waw Even 
+054C:  MOVLW  00
+054E:  MOVWF  01
+0550:  BRA    0564
+.................... 	}else {										// Odd Parity 
+0552:  BRA    0564
+.................... 		if (count) return 0;		// Result was odd  
+0554:  MOVF   xB4,F
+0556:  BZ    0560
+0558:  MOVLW  00
+055A:  MOVWF  01
+055C:  BRA    0564
+055E:  BRA    0564
+.................... 		else return 1;				// Result waw Even 
+0560:  MOVLW  01
+0562:  MOVWF  01
+.................... 	} 
+0564:  GOTO   05B4 (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+.................... void waitTxBufEmpty() 
+.................... { 
+.................... 	unsigned char *txsta, cData; 
+.................... 	txsta = 0xfac; 
+0568:  MOVLW  0F
+056A:  MOVWF  xB3
+056C:  MOVLW  AC
+056E:  MOVWF  xB2
+.................... 	 
+.................... 	do { 
+.................... 		cData = *txsta & 0x02;	// Check Transmit flag 
+0570:  MOVFF  B2,FE9
+0574:  MOVFF  B3,FEA
+0578:  MOVF   FEF,W
+057A:  ANDLW  02
+057C:  MOVWF  xB4
+.................... 	} while (!cData); 
+057E:  MOVF   xB4,F
+0580:  BZ    0570
+0582:  GOTO   05EE (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+.................... void USART_SendData(unsigned char data) 
+.................... { 
+.................... 	unsigned char *txreg, *txsta; 
+.................... 	unsigned char tsta, pmask; 
+....................  
+.................... 	pmask =0; 
+*
+05A8:  CLRF   xB1
+....................  
+.................... 	if 	(gUSART_Parity != USART_Parity_No) { 
+05AA:  MOVF   1C,F
+05AC:  BZ    05B8
+.................... 		pmask = evaluateParity(data); 
+05AE:  MOVFF  AB,B2
+05B2:  BRA    0510
+05B4:  MOVFF  01,B1
+.................... 	} 
+....................  
+.................... 	// Parity bit set 
+.................... 	txsta = (0xfac & 0xfe); 
+05B8:  CLRF   xAF
+05BA:  MOVLW  AC
+05BC:  MOVWF  xAE
+.................... 	tsta = *txsta | pmask;	// update Parity bit 
+05BE:  MOVFF  AE,FE9
+05C2:  MOVFF  AF,FEA
+05C6:  MOVF   FEF,W
+05C8:  IORWF  xB1,W
+05CA:  MOVWF  xB0
+.................... 	*txsta = tsta; 
+05CC:  MOVFF  AE,FE9
+05D0:  MOVFF  AF,FEA
+05D4:  MOVFF  B0,FEF
+....................  
+.................... 	txreg = 0xfad; 
+05D8:  MOVLW  0F
+05DA:  MOVWF  xAD
+05DC:  MOVLW  AD
+05DE:  MOVWF  xAC
+.................... 	*txreg = data;			// Send data to Tx Buffer 
+05E0:  MOVFF  AC,FE9
+05E4:  MOVFF  AD,FEA
+05E8:  MOVFF  AB,FEF
+....................  
+.................... 	waitTxBufEmpty();		// wait until transmit finish 
+05EC:  BRA    0568
+....................  
+.................... 	if (gUSART_StopBits) delay_us(gUSART_delay);	// additional stop bit  
+05EE:  MOVF   1B,F
+05F0:  BZ    060A
+05F2:  MOVFF  1E,B2
+05F6:  INCF   xB2,F
+05F8:  DECF   xB2,F
+05FA:  BTFSC  FD8.2
+05FC:  BRA    0604
+05FE:  SETF   xB3
+0600:  RCALL  0586
+0602:  BRA    05F8
+0604:  MOVFF  1D,B3
+0608:  RCALL  0586
+060A:  GOTO   0636 (RETURN)
+.................... } 
+....................  
+....................  
+....................  
+.................... void USART_SendString(unsigned char* str) 
+.................... {	 
+.................... 	while (*str) {			//make it sure that str is a string ends with a zero. 
+060E:  MOVFF  A9,03
+0612:  MOVFF  A8,FE9
+0616:  MOVFF  A9,FEA
+061A:  MOVF   FEF,F
+061C:  BZ    0638
+.................... 		USART_SendData (*str++); 
+061E:  MOVFF  A9,03
+0622:  MOVF   xA8,W
+0624:  INCF   xA8,F
+0626:  BTFSC  FD8.2
+0628:  INCF   xA9,F
+062A:  MOVWF  FE9
+062C:  MOVFF  03,FEA
+0630:  MOVFF  FEF,AB
+0634:  BRA    05A8
+0636:  BRA    060E
+.................... 	} 
+0638:  RETURN 0
+.................... } 
+....................  
+....................  
+....................  
+.................... //----------------------------------------------------------------- 
+.................... // Rx Related Functions 
+.................... //------------------------------------------------------------------ 
+.................... void Push(unsigned char data) 
+.................... { 
+.................... 	rxHead %= MAX_DATA; 
+*
+00CA:  BCF    x9F.7
+.................... 	if (rxCount < MAX_DATA) { 
+00CC:  MOVF   xA1,W
+00CE:  SUBLW  7F
+00D0:  BNC   00E8
+.................... 		USART_Buf[rxHead++] = data; 
+00D2:  MOVF   x9F,W
+00D4:  INCF   x9F,F
+00D6:  CLRF   03
+00D8:  ADDLW  1F
+00DA:  MOVWF  FE9
+00DC:  MOVLW  00
+00DE:  ADDWFC 03,W
+00E0:  MOVWF  FEA
+00E2:  MOVFF  C1,FEF
+.................... 		rxCount++; 
+00E6:  INCF   xA1,F
+.................... 	} 
+00E8:  GOTO   0100 (RETURN)
+.................... } 
+....................  
+.................... unsigned char Pop() 
+.................... { 
+.................... 	unsigned char data=0; 
+.................... 	rxTail %= MAX_DATA; 
+....................  
+.................... 	if (rxCount>0) { 
+.................... 		data = USART_Buf[rxTail++]; 
+.................... 		rxCount = rxCount -1; 
+.................... 	} 
+.................... 	return data; 
+.................... } 
+....................  
+.................... char	isDataReady() 
+.................... { 
+.................... 	if (rxCount>0) return 1; 
+.................... 	else return 0; 
+.................... } 
+....................  
+.................... void flushRxBuf() 
+.................... { 
+.................... 	rxHead=rxTail=rxCount=0; 
+.................... } 
+....................  
+.................... #INT_RDA 
+.................... void USART_Isr() 
+.................... { 
+.................... 	unsigned char data; 
+....................  
+.................... 	disable_interrupts(GLOBAL); 
+00EC:  BCF    FF2.6
+00EE:  BCF    FF2.7
+00F0:  BTFSC  FF2.7
+00F2:  BRA    00EE
+.................... 	data = USART_ReceiveData(); 
+00F4:  BRA    00AE
+00F6:  MOVFF  01,C0
+.................... 	Push(data); 
+00FA:  MOVFF  C0,C1
+00FE:  BRA    00CA
+.................... 	enable_interrupts(GLOBAL); 
+0100:  MOVLW  C0
+0102:  IORWF  FF2,F
+0104:  BCF    F9E.5
+0106:  GOTO   0060
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... void Setup() 
+.................... { 
+.................... 	GPIO_InitTypeDef GPIO_Init_Structure; 
+....................  
+.................... 	// PORTC Initialize 
+.................... 	GPIO_Init_Structure.GPIO_Pin = GPIO_Pin7|GPIO_Pin5|GPIO_Pin3; 
+*
+0432:  MOVLW  A8
+0434:  MOVWF  xA2
+.................... 	GPIO_Init_Structure.GPIO_PU = 0; 
+0436:  BCF    xA3.1
+.................... 	GPIO_Init_Structure.GPIO_Mode = OUT; 
+0438:  BCF    xA3.0
+.................... 	GPIO_Init(PORTC,&GPIO_Init_Structure); 
+043A:  MOVLW  02
+043C:  MOVWF  xAA
+043E:  CLRF   xAC
+0440:  MOVLW  A2
+0442:  MOVWF  xAB
+0444:  RCALL  010A
+....................  
+.................... 	GPIO_Init_Structure.GPIO_Pin = GPIO_Pin0|GPIO_Pin1|GPIO_Pin2|GPIO_Pin4|GPIO_Pin6; 
+0446:  MOVLW  57
+0448:  MOVWF  xA2
+.................... 	GPIO_Init_Structure.GPIO_Mode = IN; 
+044A:  BSF    xA3.0
+.................... 	GPIO_Init(PORTC,&GPIO_Init_Structure); 
+044C:  MOVLW  02
+044E:  MOVWF  xAA
+0450:  CLRF   xAC
+0452:  MOVLW  A2
+0454:  MOVWF  xAB
+0456:  RCALL  010A
+....................  
+.................... 	 
+....................  
+.................... 	// PORT B Initialize, PB7 Output for TxD 
+.................... 	GPIO_Init_Structure.GPIO_Pin = GPIO_Pin7; 
+0458:  MOVLW  80
+045A:  MOVWF  xA2
+.................... 	GPIO_Init_Structure.GPIO_Mode = OUT; 
+045C:  BCF    xA3.0
+.................... 	GPIO_Init(PORTB,&GPIO_Init_Structure); 
+045E:  MOVLW  01
+0460:  MOVWF  xAA
+0462:  CLRF   xAC
+0464:  MOVLW  A2
+0466:  MOVWF  xAB
+0468:  RCALL  010A
+....................  
+....................  
+.................... 	// USART Initialize 
+....................  
+.................... 	USART_InitTypeDef	USART_InitStruct; 
+....................  
+.................... 	USART_InitStruct.USART_BaudRate = BAUD_115200; 
+046A:  CLRF   xA5
+046C:  MOVLW  67
+046E:  MOVWF  xA4
+.................... 	USART_InitStruct.USART_DataLength = USART_DataLength_8b; 
+0470:  CLRF   xA6
+.................... 	USART_InitStruct.USART_StopBits = USART_StopBits_1; 
+0472:  CLRF   xA7
+.................... 	USART_InitStruct.USART_Parity = USART_Parity_No; 
+0474:  CLRF   xA8
+.................... 	USART_InitStruct.USART_Mode = USART_Mode_Tx|USART_Mode_Rx; 
+0476:  MOVLW  30
+0478:  MOVWF  xA9
+....................  
+.................... 	USART_Init(&USART_InitStruct);		// Init UART 
+047A:  CLRF   xAB
+047C:  MOVLW  A4
+047E:  MOVWF  xAA
+0480:  BRA    0312
+.................... 	//USART_ITConfig(USART_IT_RXNE, ENABLE);	// Interrupt Enable 
+.................... 	USART_Cmd(ENABLE);					// UART Start 
+0482:  MOVLW  01
+0484:  MOVWF  xAA
+0486:  BRA    03EC
+0488:  GOTO   06FC (RETURN)
+.................... } 
+....................  
+....................  
+.................... void Loop() 
+.................... { 
+.................... 	GPIO_SetBits(PORTC, GPIO_Pin7); 
+*
+0676:  MOVLW  02
+0678:  MOVWF  xA6
+067A:  MOVLW  80
+067C:  MOVWF  xA7
+067E:  BRA    04FE
+.................... 	USART_SendString((unsigned char*) "On"); 
+0680:  MOVLW  4F
+0682:  MOVWF  xA2
+0684:  MOVLW  6E
+0686:  MOVWF  xA3
+0688:  CLRF   xA4
+068A:  CLRF   xA9
+068C:  MOVLW  A2
+068E:  MOVWF  xA8
+0690:  RCALL  060E
+.................... 	delay_ms(500); 
+0692:  MOVLW  02
+0694:  MOVWF  xA6
+0696:  MOVLW  FA
+0698:  MOVWF  xA7
+069A:  RCALL  063A
+069C:  DECFSZ xA6,F
+069E:  BRA    0696
+.................... 	GPIO_ResetBits(PORTC, GPIO_Pin7); 
+06A0:  MOVLW  02
+06A2:  MOVWF  xA6
+06A4:  MOVLW  80
+06A6:  MOVWF  xA7
+06A8:  BRA    0666
+.................... 	USART_SendString((unsigned char*) "Off"); 
+06AA:  MOVLW  4F
+06AC:  MOVWF  xA2
+06AE:  MOVLW  66
+06B0:  MOVWF  xA3
+06B2:  MOVWF  xA4
+06B4:  CLRF   xA5
+06B6:  CLRF   xA9
+06B8:  MOVLW  A2
+06BA:  MOVWF  xA8
+06BC:  RCALL  060E
+.................... 	delay_ms(500);	 
+06BE:  MOVLW  02
+06C0:  MOVWF  xA6
+06C2:  MOVLW  FA
+06C4:  MOVWF  xA7
+06C6:  RCALL  063A
+06C8:  DECFSZ xA6,F
+06CA:  BRA    06C2
+06CC:  GOTO   06FE (RETURN)
+.................... } 
+....................  
+....................  
+.................... void main() 
+06D0:  CLRF   FF8
+06D2:  BCF    FD0.7
+06D4:  BSF    07.7
+06D6:  CLRF   1B
+06D8:  CLRF   1C
+06DA:  CLRF   1E
+06DC:  CLRF   1D
+06DE:  CLRF   x9F
+06E0:  CLRF   xA0
+06E2:  CLRF   xA1
+06E4:  MOVLW  00
+06E6:  MOVWF  F7E
+06E8:  BCF    FC1.0
+06EA:  BCF    FC1.1
+06EC:  BCF    FC1.2
+06EE:  BCF    FC1.3
+06F0:  MOVWF  F7F
+06F2:  CLRF   F6B
+06F4:  CLRF   F6D
+06F6:  CLRF   19
+06F8:  CLRF   1A
+.................... { 
+.................... 	Setup(); 
+06FA:  BRA    0432
+.................... 	while(TRUE) 
+.................... 	{ 
+.................... 		//TODO: User Code 
+.................... 		Loop(); 
+06FC:  BRA    0676
+06FE:  BRA    06FC
+.................... 	} 
+.................... } 
+0700:  BRA    0700
+
+Configuration Fuses:
+   Word  1: F200   CPUDIV1 USBDIV1 HS PLLEN PCLKEN FCMEN IESO
+   Word  2: 0A09   NOPUT NOBROWNOUT BORV27 NOWDT WDT32
+   Word  3: 0800   HFOFST NOMCLR
+   Word  4: 0009   STVREN NOLVP BBSIZ2K NOXINST DEBUG
+   Word  5: C003   NOPROTECT NOCPB NOCPD
+   Word  6: E003   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 4003   NOEBTR NOEBTRB
+
+   Some fuses have been forced to be compatible with the ICD debugger.

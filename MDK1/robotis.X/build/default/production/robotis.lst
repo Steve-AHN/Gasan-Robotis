@@ -1,0 +1,76 @@
+CCS PCH C Compiler, Version 5.056d, 1               10-3-16 12:53
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   F:\Robotis\Micom\robotis.X\build\default\production\robotis.lst
+
+               ROM used:   30 bytes (0%)
+                           Largest free fragment is 15522
+               RAM used:   4 (1%) at main() level
+                           4 (1%) worst case
+               Stack used: 0 locations
+               Stack size: 30
+
+*
+0000:  GOTO   0004
+.................... #include <robotis.h> 
+.................... #include <18LF14K50.h> 
+.................... //////////// Standard Header file for the PIC18LF14K50 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC18LF14K50 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+....................  
+.................... #FUSES WDT                   	//Watch Dog Timer 
+.................... #FUSES WDT32                 	//Watch Dog Timer uses 1:32 Postscale 
+....................  
+.................... #device ICD=TRUE 
+.................... #use delay(clock=48MHz,crystal=12MHz,USB_FULL,restart_wdt) 
+....................  
+....................  
+....................  
+.................... void main() 
+0004:  CLRF   FF8
+0006:  BCF    FD0.7
+0008:  MOVLW  00
+000A:  MOVWF  F7E
+000C:  BCF    FC1.0
+000E:  BCF    FC1.1
+0010:  BCF    FC1.2
+0012:  BCF    FC1.3
+0014:  MOVWF  F7F
+0016:  CLRF   F6B
+0018:  CLRF   F6D
+.................... { 
+....................  
+.................... 	while(TRUE) 
+.................... 	{ 
+001A:  BRA    001A
+....................  
+....................  
+.................... 		//TODO: User Code 
+.................... 	} 
+....................  
+.................... } 
+001C:  BRA    001C
+
+Configuration Fuses:
+   Word  1: F220   CPUDIV1 USBDIV2 HS PLLEN PCLKEN FCMEN IESO
+   Word  2: 0A19   NOPUT NOBROWNOUT BORV19 NOWDT WDT32
+   Word  3: 8800   HFOFST MCLR
+   Word  4: 0009   STVREN NOLVP BBSIZ2K NOXINST DEBUG
+   Word  5: C003   NOPROTECT NOCPB NOCPD
+   Word  6: E003   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 4003   NOEBTR NOEBTRB
+
+   Some fuses have been forced to be compatible with the ICD debugger.

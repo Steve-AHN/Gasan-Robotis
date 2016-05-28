@@ -1,0 +1,39 @@
+[PROJECT]
+Target=robotis.hex
+Processor_Text=PIC18LF14K50
+CCSVerions=5.056d
+Compiler=PCH
+CCSVersion=5.056d
+[Target Data]
+FileList=robotis.c
+[Directories]
+Include=
+[F:\Robotis\Micom\robotis]
+Type=4
+[mru-list]
+1=robotis.c
+
+[ProjectLog]
+Days=2
+D1=04-03-2016
+D1_L=2
+D1_L1=[76792]Project Opened.
+D1_L2=[77700]Project Closed.
+D2=05-03-2016
+D2_L=4
+D2_L1=[42318]Project Opened.
+D2_L2=[43040]Project Closed.
+D2_L3=[43638]Project Opened.
+D2_L4=[44155]Project Closed.
+
+[Documentation]
+1=F:\Robotis\Micom\robotis Notes.txt
+1T=robotis Notes.txt
+1E=
+1W=0
+Count=1
+[robotis.c]
+Type=4
+[Units]
+Count=1
+1=robotis (main)

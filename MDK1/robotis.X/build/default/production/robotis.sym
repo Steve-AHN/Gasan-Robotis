@@ -1,0 +1,75 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+F6B.6   C2OUT
+F6D.6   C1OUT
+F74     CCP_4
+F74     CCP_4_LOW
+F75     CCP_4_HIGH
+FB8     CCP_3_LOW
+FB8     CCP_3
+FB9     CCP_3_HIGH
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  main
+000004  @cinit1
+00001A  @cinit2
+
+Project Directory:
+    F:\Robotis\Micom\robotis.X\
+
+Project Files:
+    robotis.c                                               [04-3-16 21:19  CRC=00000000]
+    robotis.h                                               [04-3-16 21:19  CRC=D872A938]
+    C:\Program Files (x86)\PICC\devices\18LF14K50.h         [02-3-16 08:29  CRC=ED6C3264]
+
+Source signature=B34B0E00
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=7128
+
+Units:
+    robotis (main)
+
+Compiler Settings:
+    Processor:      PIC18LF14K50
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+    Compile Mode:       CCS5
+    Predefined symbols:
+       #define __18F14K50 1
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   build\default\production\robotis.xsym
+    Errors:      build\default\production\robotis.err
+    Ext Symbols: build\default\production\robotis.esym
+    INHX32:      build\default\production\robotis.hex
+    Symbols:     build\default\production\robotis.sym
+    List:        build\default\production\robotis.lst
+    Debug/COFF:  build\default\production\robotis.cof
+    Project:     robotis.ccspjt
+    Call Tree:   build\default\production\robotis.tre
+    Statistics:  build\default\production\robotis.STA

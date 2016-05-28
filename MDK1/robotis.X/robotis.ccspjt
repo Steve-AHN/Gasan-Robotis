@@ -1,0 +1,14 @@
+[PROJECT]
+Target=build\default\production\robotis.hex
+Processor_Text=PIC18LF14K50
+CCSVersion=5.056d
+Compiler=PCH
+[Target Data]
+FileList=robotis.c
+[build\default\production\robotis.c]
+Type=4
+[mru-list]
+1=build\default\production\robotis.c
+[Units]
+Count=1
+1=robotis (main)

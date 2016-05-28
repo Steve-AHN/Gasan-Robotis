@@ -1,0 +1,201 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019-01A strtok.save
+01B     gUSART_StopBits
+01C     gUSART_Parity
+01D-01E gUSART_delay
+01F-09E USART_Buf
+09F     rxHead
+0A0     rxTail
+0A1     rxCount
+0A2-0A5 Loop.@STRPARAM
+0A2-0A3 Setup.GPIO_Init_Structure
+0A4-0A9 Setup.USART_InitStruct
+0A6     GPIO_SetBits.Port
+0A6     GPIO_ResetBits.Port
+0A6     Loop.@SCRATCH1
+0A7     GPIO_SetBits.GPIO_Pin
+0A7     @delay_ms1.P1
+0A7     GPIO_ResetBits.GPIO_Pin
+0A7     Loop.@SCRATCH2
+0A8-0A9 USART_SendString.str
+0A8     GPIO_WriteBit.Port
+0A8     Loop.@SCRATCH3
+0A9     GPIO_WriteBit.GPIO_Pin
+0A9     Loop.@SCRATCH4
+0AA     GPIO_WriteBit.bitVal
+0AA     GPIO_Init.Port
+0AA     USART_Cmd.fs
+0AA-0AB USART_Init.USART_InitStruct
+0AA     USART_SendString.@SCRATCH1
+0AB     GPIO_WriteBit.latchData
+0AB-0AC GPIO_Init.GPIO_Init_Struct
+0AB     USART_SendData.data
+0AB-0AC USART_Cmd.rcsta
+0AC-0AD GPIO_WriteBit.latchAddr
+0AC-0AD USART_SendData.txreg
+0AC-0AD USART_Init.txsta
+0AD     USART_Cmd.cmData
+0AD-0AE GPIO_Init.tris
+0AE-0AF USART_Init.rcsta
+0AE-0AF GPIO_WriteBit.portAddr
+0AE-0AF USART_SendData.txsta
+0AE     USART_Cmd.@SCRATCH1
+0AF     GPIO_Init.mask
+0AF     USART_Cmd.@SCRATCH2
+0B0     USART_Init.dataLength
+0B0     USART_SendData.tsta
+0B0     GPIO_Init.@SCRATCH1
+0B0     GPIO_WriteBit.@SCRATCH1
+0B1     USART_Init.txmode
+0B1     USART_SendData.pmask
+0B1     GPIO_Init.@SCRATCH2
+0B1     GPIO_WriteBit.@SCRATCH2
+0B2     USART_Init.rxmode
+0B2     evaluateParity.data
+0B2-0B3 waitTxBufEmpty.txsta
+0B2     GPIO_Init.@SCRATCH3
+0B2     USART_SendData.@SCRATCH1
+0B3     evaluateParity.i
+0B3     @delay_us1.P1
+0B3     USART_Init.@SCRATCH1
+0B3     USART_SendData.@SCRATCH2
+0B4     waitTxBufEmpty.cdata
+0B4     evaluateParity.count
+0B4     USART_Init.@SCRATCH2
+0B5-0B6 SetBaudRate.baudRate
+0B5     evaluateParity.mask
+0B5     waitTxBufEmpty.@SCRATCH1
+0B7-0B8 SetBaudRate.spbrg
+0B9-0BA SetBaudRate.spbrgh
+0BB-0BC @MUL1616.P1
+0BB     SetBaudRate.@SCRATCH1
+0BC     SetBaudRate.@SCRATCH2
+0BD-0BE @MUL1616.P1
+0BD     SetBaudRate.@SCRATCH3
+0BE     SetBaudRate.@SCRATCH4
+0BF     @MUL1616.@SCRATCH1
+0C0     USART_Isr.data
+0C1     Push.data
+0C1-0C2 USART_ReceiveData.rcreg
+0C2     Push.@SCRATCH1
+0C3     USART_ReceiveData.data
+0C3     Push.@SCRATCH2
+F6B.6   C2OUT
+F6D.6   C1OUT
+F74     CCP_4_LOW
+F74     CCP_4
+F75     CCP_4_HIGH
+FB8     CCP_3
+FB8     CCP_3_LOW
+FB9     CCP_3_HIGH
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0000AE  USART_ReceiveData
+0000CA  Push
+0000EC  USART_Isr
+00010A  GPIO_Init
+000170  @MUL1616
+00018E  SetBaudRate
+000312  USART_Init
+0003EC  USART_Cmd
+000432  Setup
+00048C  GPIO_WriteBit
+0004FE  GPIO_SetBits
+000510  evaluateParity
+000568  waitTxBufEmpty
+000586  @delay_us1
+0005A8  USART_SendData
+00060E  USART_SendString
+00063A  @delay_ms1
+000666  GPIO_ResetBits
+000676  Loop
+0006D0  MAIN
+0006D0  @cinit1
+0006F6  @cinit2
+
+Project Directory:
+    F:\Robotis\Micom\
+
+Project Files:
+    robotis.c                                               [14-3-16 02:21  CRC=FD290306]
+    robotis.h                                               [08-3-16 23:46  CRC=76369C36]
+    C:\Program Files (x86)\PICC\devices\18LF14K50.h         [02-3-16 08:29  CRC=ED6C3264]
+    C:\Program Files (x86)\PICC\drivers\stdio.h             [31-7-07 14:24  CRC=4E4534F4]
+    C:\Program Files (x86)\PICC\drivers\string.h            [26-3-15 12:34  CRC=C4814297]
+    C:\Program Files (x86)\PICC\drivers\stddef.h            [05-9-14 11:47  CRC=897CEC6C]
+    C:\Program Files (x86)\PICC\drivers\ctype.h             [03-1-08 14:55  CRC=2D1F019F]
+    gpio.c                                                  [13-3-16 01:28  CRC=D3F0C48C]
+    uart.c                                                  [14-3-16 14:14  CRC=A44D0D68]
+
+Source signature=46B91692
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=06B7
+
+Units:
+    robotis (main)
+
+Compiler Settings:
+    Processor:      PIC18LF14K50
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    ICD Provisions: Yes
+    Compile Mode:       CCS5
+    Predefined symbols:
+       #define __DEBUG 1
+       #define __18F14K50 TRUE
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    Errors:      robotis.err
+    INHX32:      robotis.hex
+    Symbols:     robotis.sym
+    List:        robotis.lst
+    Debug/COFF:  robotis.cof
+    Project:     robotis.ccspjt
+    Call Tree:   robotis.tre
+    Statistics:  robotis.STA
